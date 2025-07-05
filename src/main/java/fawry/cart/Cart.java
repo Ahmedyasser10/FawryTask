@@ -1,7 +1,6 @@
 package fawry.cart;
 
 import fawry.model.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 

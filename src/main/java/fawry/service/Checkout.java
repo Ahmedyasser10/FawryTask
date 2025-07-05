@@ -6,7 +6,8 @@ import fawry.model.Product;
 import fawry.model.Shippable;
 import fawry.user.Customer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Checkout {
     public static void process(Customer customer, Cart cart) {
@@ -17,7 +18,8 @@ public class Checkout {
 
         for (CartItem item : cart.getItems()) {
             Product p = item.product;
-            if (!p.isAvailable(item.quantity)) throw new IllegalStateException("Product out of stock or expired: " + p.getName());
+            if (!p.isAvailable(item.quantity))
+                throw new IllegalStateException("Product out of stock or expired: " + p.getName());
 
             subtotal += item.getTotalPrice();
 
@@ -31,7 +33,8 @@ public class Checkout {
         double shippingFee = shippableItems.isEmpty() ? 0 : 30;
         double total = subtotal + shippingFee;
 
-        if (!customer.canAfford(total)) throw new IllegalStateException("Insufficient balance.");
+        if (!customer.canAfford(total))
+            throw new IllegalStateException("Insufficient balance.");
 
         customer.deduct(total);
         cart.getItems().forEach(i -> i.product.decreaseQuantity(i.quantity));
@@ -42,11 +45,11 @@ public class Checkout {
 
         System.out.println("** Checkout receipt **");
         for (CartItem i : cart.getItems()) {
-            System.out.printf("%dx %s\t%.0f \n", i.quantity, i.product.getName(), i.getTotalPrice());
+            System.out.printf("%dx %s\t%.0f\n", i.quantity, i.product.getName(), i.getTotalPrice());
         }
         System.out.println("----------------------");
-        System.out.printf("Subtotal\t%.0f \n", subtotal);
-        System.out.printf("Shipping\t%.0f \n", shippingFee);
-        System.out.printf("Amount\t\t%.0f \n", total);
+        System.out.printf("Subtotal\t%.0f\n", subtotal);
+        System.out.printf("Shipping\t%.0f\n", shippingFee);
+        System.out.printf("Amount\t\t%.0f\n", total);
     }
 }
