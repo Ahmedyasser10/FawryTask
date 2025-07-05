@@ -10,7 +10,7 @@ public class Customer {
     public Customer(String name, double balance) {
         this.name = name;
         this.balance = balance;
-        this.cart = new Cart(); // cart is initialized here
+        this.cart = new Cart(); 
     }
 
     public Cart getCart() {
