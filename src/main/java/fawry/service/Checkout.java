@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Checkout {
-    public static void process(Customer customer, Cart cart) {
+    public static void process(Customer customer) {
+        Cart cart = customer.getCart();
+
         if (cart.isEmpty()) throw new IllegalStateException("Cart is empty!");
 
         double subtotal = 0;
@@ -51,5 +53,6 @@ public class Checkout {
         System.out.printf("Subtotal\t%.0f\n", subtotal);
         System.out.printf("Shipping\t%.0f\n", shippingFee);
         System.out.printf("Amount\t\t%.0f\n", total);
+        System.out.printf("Remaining Balance\t%.0f\n", customer.getBalance());
     }
 }

@@ -1,12 +1,20 @@
 package fawry.user;
 
+import fawry.cart.Cart;
+
 public class Customer {
     private String name;
     private double balance;
+    private Cart cart;
 
     public Customer(String name, double balance) {
         this.name = name;
         this.balance = balance;
+        this.cart = new Cart(); // cart is initialized here
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 
     public boolean canAfford(double total) {
